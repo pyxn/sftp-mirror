@@ -1,0 +1,46 @@
+branding:
+  icon: 'upload-cloud'
+  color: 'blue'
+name: 'SFTP-Mirror'
+description: 'Mirror files via FTP/SFTP to a remote server using LFTP Mirror'
+inputs:
+  HOSTNAME:
+    description: 'Sever IP address/hostname'
+    required: true
+  USERNAME:
+    description: 'Server account username (e.g. root)'
+    required: true
+  PASSWORD:
+    description: 'Server account password'
+    required: true
+  PROTOCOL:
+    description: 'Transfer protocol type (ftp/sftp)'
+    required: true
+    default: "ftp"
+  PORT:
+    description: 'Transfer protocol port connection'
+    required: true
+    default: "21"
+  PATH_LOCAL:
+    description: 'Local source directory path'
+    required: true
+    default: ""
+  PATH_REMOTE:
+    description: 'Server target directory path'
+    required: true
+    default: ""
+  ARGS:
+    description: 'LFTP MIRROR command arguments'
+    required: false
+    default: ""
+runs:
+  using: 'docker'
+  image: 'Dockerfile'
+  args:
+    - ${{ inputs.HOSTNAME }}
+    - ${{ inputs.USERNAME }}
+    - ${{ inputs.PASSWORD }}
+    - ${{ inputs.PROTOCOL }}
+    - ${{ inputs.PORT }}
+    - ${{ inputs.PATH_LOCAL }}
+    - ${{ inputs.PATH_REMOTE }}

@@ -1,0 +1,27 @@
+# SAMPLE MAIN.YML FILE
+# Triggers the SFTP-Mirror action when a push is detected on the main branch
+
+on:
+  push:
+    branches:    
+      - main
+      
+name: Github Action - SFTP Mirror
+jobs:
+  SFTP-Mirror:
+    name: SFTP Mirror
+    runs-on: ubuntu-latest
+    steps:
+    - uses: actions/checkout@master
+
+    - name: SFTP Mirror
+      uses: pyxn/sftp-mirror@1.0.0
+      env:
+        HOSTNAME: ${{ secrets.HOSTNAME }}
+        USERNAME: ${{ secrets.USERNAME }}
+        PASSWORD: ${{ secrets.PASSWORD }}
+        PATH_LOCAL: "./"
+        PATH_REMOTE: "./"
+        PROTOCOL: sftp
+        PORT: 22
+        ARGS: --verbose --delete
