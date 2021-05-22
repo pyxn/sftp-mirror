@@ -15,7 +15,7 @@ jobs:
     - uses: actions/checkout@master
 
     - name: SFTP Mirror
-      uses: pyxn/sftp-mirror@1.0.0
+      uses: pyxn/sftp-mirror@v1.0.0
       env:
         HOSTNAME: ${{ secrets.HOSTNAME }}
         USERNAME: ${{ secrets.USERNAME }}
