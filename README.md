@@ -20,7 +20,7 @@ jobs:
     - uses: actions/checkout@master
 
     # ----------------------------------------------------
-    # MIRROR: FULL MODE
+    # MIRROR_FULL MODE
     # Mirrors the entire directory (local to remote)
     # ----------------------------------------------------
     - name: SFTP Mirror (Full)
@@ -37,7 +37,7 @@ jobs:
         MODE: mirror_full
 
     # ----------------------------------------------------
-    # MIRROR: FILE_CREATE MODE
+    # MIRROR_FILE_CREATE MODE
     # Creates a single file with ASCII text content and
     # places it in the specified directory.
     # ----------------------------------------------------
