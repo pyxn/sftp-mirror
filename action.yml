@@ -1,8 +1,8 @@
+name: 'SFTP-Mirror'
+description: 'Mirror files via FTP/SFTP to a remote server using LFTP Mirror'
 branding:
   icon: 'upload-cloud'
   color: 'blue'
-name: 'SFTP-Mirror'
-description: 'Mirror files via FTP/SFTP to a remote server using LFTP Mirror'
 inputs:
   HOSTNAME:
     description: 'Sever IP address/hostname'
