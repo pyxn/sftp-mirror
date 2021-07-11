@@ -5,6 +5,9 @@ Github Action: Mirror files between a remote and local server via FTP/SFTP throu
 Sample GitHub action using the two available modes:
 ```yaml
 name: Github Action - SFTP Mirror
+# ----------------------------------------------------
+# ACTION TRIGGER: Push on Main Branch
+# ----------------------------------------------------
 on:
   push:
     branches:    
@@ -16,6 +19,10 @@ jobs:
     steps:
     - uses: actions/checkout@master
 
+    # ----------------------------------------------------
+    # MIRROR: FULL MODE
+    # Mirrors the entire directory (local to remote)
+    # ----------------------------------------------------
     - name: SFTP Mirror (Full)
       uses: pyxn/sftp-mirror@v.2.0.0
       env:
@@ -29,6 +36,11 @@ jobs:
         ARGS: --verbose --delete
         MODE: mirror_full
 
+    # ----------------------------------------------------
+    # MIRROR: FILE_CREATE MODE
+    # Creates a single file with ASCII text content and
+    # places it in the specified directory.
+    # ----------------------------------------------------
     - name: SFTP Mirror (File Create)
       uses: pyxn/sftp-mirror@v.2.0.0
       env:
