@@ -33,6 +33,15 @@ inputs:
     description: 'LFTP MIRROR command arguments'
     required: false
     default: ""
+  MODE:
+    description: 'SFTP Mirror Mode'
+    required: false
+    default: "mirror_full"
+  CREATE_FILE_NAME:
+    description: 'Name of the file to create (mode: mirror_file_create)'
+    required: false
+  CREATE_FILE_CONTENTS:
+    description: 'Contents of the new file (mode: mirror_file_create)'
 runs:
   using: 'docker'
   image: 'Dockerfile'
@@ -44,3 +53,7 @@ runs:
     - ${{ inputs.PORT }}
     - ${{ inputs.PATH_LOCAL }}
     - ${{ inputs.PATH_REMOTE }}
+    - ${{ inputs.ARGS }}
+    - ${{ inputs.MODE }}
+    - ${{ inputs.CREATE_FILE_NAME }}
+    - ${{ inputs.CREATE_FILE_CONTENTS }}
