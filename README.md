@@ -24,7 +24,7 @@ jobs:
     # Mirrors the entire directory (local to remote)
     # ----------------------------------------------------
     - name: SFTP Mirror (Full)
-      uses: pyxn/sftp-mirror@v.2.0.0
+      uses: pyxn/sftp-mirror@v2.0.0
       env:
         HOSTNAME: ${{ secrets.HOSTNAME }}
         USERNAME: ${{ secrets.USERNAME }}
@@ -42,7 +42,7 @@ jobs:
     # places it in the specified directory.
     # ----------------------------------------------------
     - name: SFTP Mirror (File Create)
-      uses: pyxn/sftp-mirror@v.2.0.0
+      uses: pyxn/sftp-mirror@v2.0.0
       env:
         HOSTNAME: ${{ secrets.HOSTNAME }}
         USERNAME: ${{ secrets.USERNAME }}
