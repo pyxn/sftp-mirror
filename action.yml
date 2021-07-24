@@ -37,10 +37,10 @@ inputs:
     description: 'SFTP Mirror Mode'
     required: false
     default: "mirror_full"
-  CREATE_FILE_NAME:
+  FILE_NAME:
     description: 'Name of the file to create (mode: mirror_file_create)'
     required: false
-  CREATE_FILE_CONTENTS:
+  FILE_CONTENTS:
     description: 'Contents of the new file (mode: mirror_file_create)'
 runs:
   using: 'docker'
@@ -55,5 +55,5 @@ runs:
     - ${{ inputs.PATH_REMOTE }}
     - ${{ inputs.ARGS }}
     - ${{ inputs.MODE }}
-    - ${{ inputs.CREATE_FILE_NAME }}
-    - ${{ inputs.CREATE_FILE_CONTENTS }}
+    - ${{ inputs.FILE_NAME }}
+    - ${{ inputs.FILE_CONTENTS }}
