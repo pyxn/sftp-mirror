@@ -5,31 +5,24 @@
 # ---------------------------------------------------------------------------------------------------------------------
 
 # Mirror entire contents of local directory to remote directory
-function sftp_mirror_full() {
+function mirror_upload_full() {
   echo "Initializing LFTP file transfer: Full Mirror Mode..."
   lftp ${PROTOCOL}://${HOSTNAME}:${PORT} -u ${USERNAME},${PASSWORD} -e "mirror ${ARGS} -R ${PATH_LOCAL} ${PATH_REMOTE}"
   echo "SFTP Mirror operation completed. Please verify the status of your files."
 }
 
 # Mirror a single file created in local directory to remote directory
-function sftp_mirror_file_create() {
+function mirror_upload_file_create() {
 
-  # Create a new file with specified filename and extension
-  touch "${CREATE_FILE_NAME}"
-  echo "Successfully created new file with filename ${CREATE_FILE_NAME}."
-
-  # Place specified contents into the new file
-  echo "${CREATE_FILE_CONTENTS}" >${CREATE_FILE_NAME}
-  echo "Successfully filled ${CREATE_FILE_NAME} with specified file contents."
+  # Create a new file with specified filename and extension and contents
+  echo "${CREATE_FILE_CONTENTS}" >${FILE_NAME}
+  echo "Successfully created new file with filename ${FILE_NAME}."
 
   # Start LFTP Transfer of single file
-  # main command option: put
-  # -e          delete target file before the transfer
-  # -E          delete source files after successful transfer (dangerous)
-  # -a          use ascii mode (binary is the default)
+  # main command option: -f FILE mirror a single file to the directory
   echo "Initializing LFTP file transfer: Single File Create Mirror Mode..."
-  lftp ${PROTOCOL}://${HOSTNAME}:${PORT} -u ${USERNAME},${PASSWORD} -e "put -E -e -a ${CREATE_FILE_NAME} -o ${PATH_REMOTE}${CREATE_FILE_NAME}"
-  echo "Successfully transferred ${CREATE_FILE_NAME} to specified directory."
+  lftp ${PROTOCOL}://${HOSTNAME}:${PORT} -u ${USERNAME},${PASSWORD} -e "mirror -f ${FILE_NAME} ${ARGS} -R ${PATH_LOCAL} ${PATH_REMOTE}"
+  echo "Successfully transferred ${FILE_NAME} to specified directory."
   echo "SFTP Mirror operation completed. Please verify the status of your files."
 }
 
@@ -51,13 +44,13 @@ fi
 
 case ${MODE} in
 mirror_full)
-  sftp_mirror_full
+  mirror_upload_full
   ;;
 mirror_file_create)
-  sftp_mirror_file_create
+  mirror_upload_file_create
   ;;
 *)
-  sftp_mirror_full
+  mirror_upload_full
   ;;
 esac
 
