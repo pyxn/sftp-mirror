@@ -14,6 +14,8 @@ function mirror_upload_full() {
 # Mirror a single file created in local directory to remote directory
 function mirror_upload_file_create() {
 
+  # Check current directory
+  pwd
   # Create a new file with specified filename and extension and contents
   echo "${FILE_CONTENTS}" >${FILE_NAME}
   echo "Successfully created new file with filename ${FILE_NAME}."
@@ -21,7 +23,7 @@ function mirror_upload_file_create() {
   # Start LFTP Transfer of single file
   # main command option: -f FILE mirror a single file to the directory
   echo "Initializing LFTP file transfer: Single File Create Mirror Mode..."
-  lftp ${PROTOCOL}://${HOSTNAME}:${PORT} -u ${USERNAME},${PASSWORD} -e "mirror -f ${FILE_NAME} ${ARGS} -R ./ ${PATH_REMOTE}"
+  lftp ${PROTOCOL}://${HOSTNAME}:${PORT} -u ${USERNAME},${PASSWORD} -e "mirror -f ${FILE_NAME} ${ARGS} -R ${PATH_LOCAL} ${PATH_REMOTE}"
   echo "Successfully transferred ${FILE_NAME} to specified directory."
   echo "SFTP Mirror operation completed. Please verify the status of your files."
 }
