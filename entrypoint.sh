@@ -32,6 +32,7 @@ function mirror_upload_file_create() {
 set -eu
 echo "SFTP Mirror"
 
+# Connect using SFTP if specified, else use FTP
 if [ ${PROTOCOL} = "sftp" ]; then
   echo "Establishing SFTP connection..."
   sshpass -p ${PASSWORD} sftp -o StrictHOSTKeyChecking=no -P ${PORT} ${USERNAME}@${HOSTNAME}
@@ -42,15 +43,19 @@ else
   echo "Connecting to PORT ${PORT} via FTP..."
 fi
 
+# Use a different function depending on specified mode
 case ${MODE} in
-mirror_full)
+mirror_upload_full)
   mirror_upload_full
   ;;
-mirror_file_create)
+mirror_upload_file_create)
   mirror_upload_file_create
   ;;
 *)
-  mirror_upload_full
+  echo "No mode specified. Mirror operation aborted."
+  echo "  Please select between: "
+  echo "    - mirror_upload_full"
+  echo "    - mirror_upload_file_create"
   ;;
 esac
 
